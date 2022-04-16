@@ -1,4 +1,5 @@
 "use strict";
+//TSC -w para verificar automaticamente alterações
 // String Com typescript existe a identificação de tipos de variaveis diferentes
 let nome = 'João';
 console.log(nome);
@@ -140,3 +141,45 @@ let valor = 30;
 // } else{
 //     console.log(typeof valor)
 // }
+//Tipo never
+function falha(msg) {
+    throw new Error(msg);
+}
+const produto = {
+    nome: 'Sabão',
+    preco: 1,
+    validarProduto() {
+        if (!this.nome || this.nome.trim().length == 0) {
+            falha('Precisa ter um nome');
+        }
+        if (this.preco <= 0) {
+            falha('Preco inválido');
+        }
+    }
+};
+produto.validarProduto();
+let altura = 12;
+// altura = null
+let alturaOpcional = 12;
+const contato1 = {
+    nome: 'Fulano',
+    tel1: '1231231',
+    tel2: null
+};
+console.log(contato1.nome);
+console.log(contato1.tel1);
+console.log(contato1.tel2);
+let contaBancaria = {
+    saldo: 3456,
+    depositar(valor) {
+        this.saldo += valor;
+    }
+};
+let correntista = {
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria,
+    contatos: ['2342342', '23423423']
+};
+correntista.contaBancaria.depositar(3000);
+console.log(correntista);
+//# sourceMappingURL=tipos.js.map

@@ -1,3 +1,5 @@
+//TSC -w para verificar automaticamente alterações
+
 // String Com typescript existe a identificação de tipos de variaveis diferentes
 let nome: string = 'João';
 console.log(nome)
@@ -186,3 +188,79 @@ let valor = 30
 // } else{
 //     console.log(typeof valor)
 // }
+
+
+//Tipo never
+
+function falha(msg: string): never{
+    throw new Error(msg)
+}
+
+const produto = {
+    nome: 'Sabão',
+    preco: 1,
+    validarProduto(){
+        if(!this.nome || this.nome.trim().length == 0){
+            falha('Precisa ter um nome')
+        }
+        if (this.preco <= 0) {
+            falha('Preco inválido')
+        }
+    }
+}
+
+produto.validarProduto()
+
+
+let altura = 12
+// altura = null
+
+
+let alturaOpcional: null | number = 12
+// alturaOpcional = null
+
+type Contato = {
+    nome: string,
+    tel1: string,
+    tel2: string | null
+}
+
+const contato1: Contato = {
+    nome: 'Fulano',
+    tel1: '1231231',
+    tel2: null
+}
+
+console.log(contato1.nome)
+console.log(contato1.tel1)
+console.log(contato1.tel2)
+
+
+//Desafio
+
+type ContaBancaria ={
+    saldo: number,
+    depositar: (valor: number) => void
+}
+
+let contaBancaria: ContaBancaria = {
+    saldo: 3456,
+    depositar(valor: number){
+        this.saldo += valor
+    }
+}
+
+type Correntista={
+    nome: string,
+    contaBancaria: ContaBancaria,
+    contatos: string[]
+}
+
+let correntista: Correntista ={
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria,
+    contatos: ['2342342','23423423']
+}
+
+correntista.contaBancaria.depositar(3000)
+console.log(correntista)
